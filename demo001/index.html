@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS 打字机效果</title>
+  <style>
+    body {
+      background-color: #24292e;
+      color: #00ff00;
+    }
+    p {
+      /* 让文字只能在一行内显示，超出则不显示 */
+      white-space: nowrap;
+      overflow: hidden;
+
+      /* 右边框作为光标 */
+      border-right: 2px solid #00ff00;
+      /* 一个字体 20px，整行 20 个字 */
+      /* 所以 keyframes typing 的 to 为 400px */
+      font-size: 20px;
+      /* 20 个字，设置分 20 步显示完 */
+      animation: typing 3s steps(20);
+    }
+
+    /* 打字动画 */
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+      to {
+        width: 400px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <p>青青子衿，悠悠我心。但为君故，沉吟至今。</p>
+</body>
+</html>
