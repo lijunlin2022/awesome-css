@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应式导航菜单</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    nav {
+      position: relative;
+    }
+    nav ul li {
+      list-style: none;
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ccc;
+    }
+    nav ul li:first-child {
+      display: none;
+    }
+    @media screen and (max-width:768px) {
+      nav ul {
+        position: absolute;
+      }
+      nav ul li {
+        display: block;
+        transform: translateX(-100%);
+        transition: all 0.4s;
+      }
+      nav ul li:first-child {
+        display: block;
+        transform: translateX(0);
+      }
+      nav ul:hover li {
+        transform: translateX(0);
+        transition: all 0.4s;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <ul>
+      <li>###</li>
+      <li>首页</li>
+      <li>归档</li>
+      <li>分类</li>
+      <li>关于</li>
+    </ul>
+  </nav>
+</body>
+</html>
