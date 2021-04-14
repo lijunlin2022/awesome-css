@@ -10,47 +10,136 @@
       padding: 0;
       margin: 0;
     }
-    nav {
+    .navbar {
       position: relative;
+      /* 让元素的宽度占浏览器可视区域的宽度 */
+      width: 100vw;
+      height: 60px;
+      background-color: #ff9500;
     }
-    nav ul li {
-      list-style: none;
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #ccc;
-    }
-    nav ul li:first-child {
+    .navbar input {
+      /* 隐藏复选框 */
       display: none;
     }
-    @media screen and (max-width:768px) {
-      nav ul {
-        position: absolute;
+    .navbar label {
+      position: absolute;
+      /* calc 自动计算让元素垂直居中 */
+      top: calc(50% - 15px);
+      right: 30px;
+      width: 30px;
+      height: 30px;
+      border-radius: 3px;
+      background-color: #fff;
+    }
+    /* 利用伪元素画两条线 */
+    .navbar label::before,
+    .navbar label::after {
+      content: "";
+      position: absolute;
+      left: 5px;
+      width: 20px;
+      height: 2px;
+      background-color: #999;
+      /* 过渡效果 */
+      /* 收回时的动画 */
+      transition: transform 0.3s ease-out, top 0.3s ease-out;
+    }
+    /* 分别移动两条线的位置 */
+    .navbar label::before {
+      top: calc(50% - 4px);
+    }
+    .navbar label::after {
+      top: calc(50% + 4px);
+    }
+    /* 定义 label 元素的动画效果 */
+    .navbar input:checked + label::before {
+      top: calc(50% - 2px);
+      transform: rotate(-45deg);
+      transition: top 0.3s ease-out, transform 0.3s ease-out 0.3s;
+    }
+    .navbar input:checked + label::after {
+      top: calc(50% - 2px);
+      transform: rotate(45deg);
+      /* 过渡效果 */
+      /* 限制性 top 的变化, 然后再执行 transform 的变化 */
+      transition: top 0.3s ease-out, transform 0.3s ease-out 0.3s;
+    }
+    /* 先写移动端的导航栏样式 */
+    .navbar ul {
+      position: relative;
+      top: 60px;
+      width: 100%;
+
+      /* 默认是看不见下方的元素的 */
+      opacity: 0;
+      /* 元素缩放到 0 就是直接隐藏 */
+      transform: scaleY(0);
+      /* 设置元素缩放的中心点位最上方的中间位置 */
+      transform-origin: 50% 0;
+      transition: all 0.3s ease-out;
+    }
+    .navbar ul li {
+      width: 100%;
+      height: 59px;
+      border-bottom: 1px solid #e6e6e6;
+    }
+    .navbar ul li a {
+      /* 将 a 标签转换为块级元素 */
+      display: block;
+      width: 100%;
+      height: 100%;
+      line-height: 60px;
+      text-align: center;
+      font-size: 18px;
+      text-decoration: none;
+      color: #666;
+    }
+    .navbar input:checked ~ ul {
+      opacity: 1;
+      transform: scaleY(1);
+    }
+
+    @media (min-width: 992px) {
+      .navbar label {
+        /* pc 端 label 元素隐藏 */
+        display: none;
       }
-      nav ul li {
-        display: block;
-        transform: translateX(-100%);
-        transition: all 0.4s;
+      .navbar ul {
+        /* 回到默认的定位 */
+        position: static;
+        display: flex;
+        /* 让元素平均分配宽度 */
+        justify-content: center;
+        /* 让元素垂直居中 */
+        align-items: center;
+        width: 1200px;
+        height: 100%;
+        margin: 0 auto;
+
+        /* 元素一直存在, 不会隐藏 */
+        opacity: 1;
+        transform: scaleY(1);
       }
-      nav ul li:first-child {
-        display: block;
-        transform: translateX(0);
+      .navbar ul li {
+        list-style: none;
       }
-      nav ul:hover li {
-        transform: translateX(0);
-        transition: all 0.4s;
+      .navbar ul li a {
+        color: #fff;
       }
     }
   </style>
 </head>
 <body>
-  <nav>
+  <div class="navbar">
+    <input type="checkbox" name="" id="nav">
+    <label for="nav"></label>
     <ul>
-      <li>###</li>
-      <li>首页</li>
-      <li>归档</li>
-      <li>分类</li>
-      <li>关于</li>
+      <li><a href="">首页</a></li>
+      <li><a href="">分类</a></li>
+      <li><a href="">归档</a></li>
+      <li><a href="">关于</a></li>
+      <li><a href="">友链</a></li>
     </ul>
-  </nav>
+  </div>
 </body>
 </html>
