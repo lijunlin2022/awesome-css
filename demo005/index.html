@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>伸缩式菜单</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      height: 100vh;
+      background-color: #ff9500;
+    }
+    body,
+    .navbar,
+    .navbar div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .navbar {
+      position: relative;
+      padding: 20px;
+      border-radius: 50px;
+      background-color: #fff;
+    }
+    .navbar input[type="checkbox"] {
+      width: 40px;
+      height: 40px;
+      /* 直接变透明, 不会产生选择的效果 */
+      opacity: 0;
+    }
+    .navbar span {
+      position: absolute;
+      left: 25px;
+      top: calc(50% - 10px);
+      width: 30px;
+      height: 4px;
+      background-color: #999;
+      /* span 覆盖了复选框 */
+      /* 加上整个属性之后,原本的事件没有了,鼠标点击就可以激发复选框事件 */
+      pointer-events: none;
+      transition: transform 0.3s ease-out, top 0.3s ease-out
+    }
+    .navbar input ~ div {
+      width: 0;
+      overflow: hidden;
+      transition: all 0.5s ease-out;
+    }
+    .navbar span:last-of-type {
+      top: calc(50% + 4px);
+    }
+    .navbar input[type="text"] {
+      width: 200px;
+      height: 40px;
+      outline: none;
+    }
+    .navbar button {
+      display: block;
+      width: 60px;
+      height: 40px;
+      margin-left: 15px;
+    }
+    .navbar input:checked ~ div {
+      width: 200px;
+    }
+    /* 选中时两条线旋转 */
+    .navbar input:checked ~ span:first-of-type {
+      top: calc(50% - 2px);
+      transform: rotate(-45deg);
+      transition: top 0.3s ease-out, transform 0.3s ease-out;
+    }
+    .navbar input:checked ~ span:last-of-type {
+      top: calc(50% - 2px);
+      transform: rotate(45deg);
+      transition: top 0.3s ease-out, transform 0.3s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <input type="checkbox" />
+    <span></span><span></span>
+    <div>
+      <input type="text" />
+      <button>确定</button>
+    </div>
+  </div>
+</body>
+</html>
